@@ -117,10 +117,9 @@ public class ReactiveTests {
                 .assertValueCount(0)
                 .assertComplete();
     }
-
-    // TODO Return an empty Mono
+    
     Mono<String> emptyMono() {
-        return null;
+        return Mono.empty();
     }
 
 //========================================================================================
@@ -135,9 +134,8 @@ public class ReactiveTests {
                 .assertComplete();
     }
 
-    // TODO Return a Mono that contains a "foo" value
     Mono<String> fooMono() {
-        return null;
+        return Mono.just("foo");
     }
 
 //========================================================================================
@@ -152,9 +150,8 @@ public class ReactiveTests {
                 .assertNotComplete();
     }
 
-    // TODO Create a Mono that emits an IllegalStateException
     Mono<String> errorMono() {
-        return null;
+        return Mono.error(new IllegalStateException());
     }
 
 }
