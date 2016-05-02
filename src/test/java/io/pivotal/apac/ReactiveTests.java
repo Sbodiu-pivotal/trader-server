@@ -4,6 +4,10 @@ import org.junit.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.test.TestSubscriber;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+
 public class ReactiveTests {
 
 //========================================================================================
@@ -18,9 +22,8 @@ public class ReactiveTests {
 				.assertComplete();
 	}
 
-	// TODO Return an empty Flux
 	Flux<String> emptyFlux() {
-		return null;
+		return Flux.empty();
 	}
 
 //========================================================================================
@@ -35,9 +38,8 @@ public class ReactiveTests {
 				.assertComplete();
 	}
 
-	// TODO Return a Flux that contains 2 values "foo" and "bar" without using an array or a collection
 	Flux<String> fooBarFluxFromValues() {
-		return null;
+		return Flux.just("foo", "bar");
 	}
 
 //========================================================================================
@@ -52,9 +54,8 @@ public class ReactiveTests {
 				.assertComplete();
 	}
 
-	// TODO Create a Flux from a List that contains 2 values "foo" and "bar"
 	Flux<String> fooBarFluxFromList() {
-		return null;
+		return Flux.fromIterable(Arrays.asList("foo", "bar"));
 	}
 
 //========================================================================================
@@ -69,9 +70,8 @@ public class ReactiveTests {
 				.assertNotComplete();
 	}
 
-	// TODO Create a Flux that emits an IllegalStateException
 	Flux<String> errorFlux() {
-		return null;
+		return Flux.error(new IllegalStateException());
 	}
 
 //========================================================================================
@@ -85,9 +85,8 @@ public class ReactiveTests {
 				.assertNotTerminated();
 	}
 
-	// TODO Create a Flux that never terminates
 	Flux<String> neverTerminatedFlux() {
-		return null;
+        return Flux.never();
 	}
 
 //========================================================================================
@@ -102,9 +101,8 @@ public class ReactiveTests {
 				.awaitAndAssertNextValues(0L, 1L, 2L);
 	}
 
-	// TODO Create a Flux that emits an increasing value each 100ms
 	Flux<Long> counter() {
-		return null;
+		return Flux.interval(Duration.of(100, ChronoUnit.MILLIS));
 	}
 
 }
