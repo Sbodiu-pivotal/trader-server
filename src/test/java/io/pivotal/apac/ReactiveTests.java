@@ -2,6 +2,7 @@ package io.pivotal.apac;
 
 import org.junit.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.core.test.TestSubscriber;
 
 import java.time.Duration;
@@ -104,5 +105,56 @@ public class ReactiveTests {
 	Flux<Long> counter() {
 		return Flux.interval(Duration.of(100, ChronoUnit.MILLIS));
 	}
+
+//========================================================================================
+
+    @Test
+    public void empty2() {
+        Mono<String> mono = emptyMono();
+        TestSubscriber<String> testSubscriber = new TestSubscriber<>();
+        testSubscriber
+                .bindTo(mono)
+                .assertValueCount(0)
+                .assertComplete();
+    }
+
+    // TODO Return an empty Mono
+    Mono<String> emptyMono() {
+        return null;
+    }
+
+//========================================================================================
+
+    @Test
+    public void fromValue() {
+        Mono<String> mono = fooMono();
+        TestSubscriber<String> testSubscriber = new TestSubscriber<>();
+        testSubscriber
+                .bindTo(mono)
+                .assertValues("foo")
+                .assertComplete();
+    }
+
+    // TODO Return a Mono that contains a "foo" value
+    Mono<String> fooMono() {
+        return null;
+    }
+
+//========================================================================================
+
+    @Test
+    public void error2() {
+        Mono<String> mono = errorMono();
+        TestSubscriber<String> testSubscriber = new TestSubscriber<>();
+        testSubscriber
+                .bindTo(mono)
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
+    }
+
+    // TODO Create a Mono that emits an IllegalStateException
+    Mono<String> errorMono() {
+        return null;
+    }
 
 }
